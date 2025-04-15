@@ -14,8 +14,8 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USER }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      - name: Checkout code
-        uses: actions/checkout@v3
+      - name: Checkout
+        uses: actions/checkout@v2
 
       - name: Install Docker Compose
         run: |
@@ -23,8 +23,8 @@ jobs:
           sudo chmod +x /usr/local/bin/docker-compose
           docker-compose --version
 
-      - name: Run tests
+      - name: Test
         run: docker-compose run --rm --build app sh -c "python manage.py test"
 
-      - name: Run linter
+      - name: Lint
         run: docker-compose run --rm --build app sh -c "flake8"
