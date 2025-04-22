@@ -14,7 +14,7 @@ from core.models import Recipe
 
 from recipe.serializers import (
     RecipeSerializer,
-    RecipeDetailSerializer,
+    RecipeDatailSerializer,
 )
 
 
@@ -98,7 +98,7 @@ class PrivateRecipeApiTests(TestCase):
         url = detail_url(recipe.id)
         res = self.client.get(url)
 
-        serializer = RecipeDetailSerializer(recipe)
+        serializer = RecipeDatailSerializer(recipe)
         self.assertEqual(res.data, serializer.data)
 
     def test_create_recipe(self):
@@ -120,7 +120,7 @@ class PrivateRecipeApiTests(TestCase):
         original_link = 'https://example.com/recipe.pdf'
         recipe = create_recipe(
             user=self.user,
-            title='Sample recipe title',
+            title='Sample',
             link=original_link,
         )
 
@@ -146,7 +146,6 @@ class PrivateRecipeApiTests(TestCase):
         payload = {
             'title': 'New recipe title',
             'link': 'https://example.com/new-recipe.pdf',
-            # مطمئن شوید که اینجا به درستی به روزرسانی می‌شود.
             'description': 'New recipe description',
             'time_minutes': 10,
             'price': Decimal('2.50'),
