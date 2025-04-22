@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from core.models import Recipe
+from core.models import Recipe, Tag
 from django.conf import settings
 
 
@@ -18,3 +18,10 @@ class RecipeDatailSerializer(RecipeSerializer):
     class Meta:
         model = Recipe
         fields = RecipeSerializer.Meta.fields + ['description']
+
+
+class TagsSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Tag,
+        fields = ['id', 'name']
+        read_only_fields = ['id']
